@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="qanda.js", src="script.js"></script> <!--JS file that holds q&a's-->  <!--All other JS codes-->
+    <title>Test Your Knowledge, Javascript Style!</title>
+</head>
+<body>
+    <section id="start page">
+        <h1>Are you ready to test your Javascript knowledge? Try this timed quiz now!</h1>
+        <button id="continue-btn">Continue</button>
+    </section>
+    <section class="all-box">
+        <div id="rules-box">
+            <h2>How this quiz works:</h2>
+            <div id="rule-list">
+                <p class="info">1. Once the start button is clicked, the timer will start.You will be given <span>90 seconds</span> to answer 8 questions!</p>
+                <p class="info">2. If questions are answered correctly, they will appear in green and will automatically move on to the next question.</p>
+                <p class="info">3. If questions are answered incorrectly, they will appear in red and <span>5 seconds</span>will be deducted from the timer .</p>
+                <p class="info">4. You'll get points on the basis of your correct answers and the total time it took you to complete the quiz.</p>
+                <p class="info">5. The quiz will end when all questions are answered or the timer reaches 0.</p>
+                <p class="info">6. Be sure to insert your initials to be added to the list of high scores!</p>
+            </div>
+            <footer>
+                <button id="start-btn">Start the Quiz</button>
+            </footer>
+    </section>
+    <section class="all-box">
+        <div id="quiz-box">
+            <header>
+                <section id="title">Javascript Fundamentals Quiz</section>
+                <section id="timer">
+                    <div id="timer-text">Time Left</div>
+                    <div id="timer-#">90</div>
+                </section>
+            </header>
+            <section id="Q&A">
+                <div id="question"></div>
+                <div id="answers"></div>
+            </section>
+            <footer>
+                <button id="next-btn"></button>
+            </footer>
+        </div>
+    </section>
+    <section class="all-box">
+        <div id="result-box">
+            <h2 id="complete-text">Congrats! You've completed the Quiz!</h2>
+            <div id="results">
+                <div id="score">Number Correct: </div>
+                <div id="time-left">Total Time Left: </div>
+            </div>
+            <footer>
+                <button id="restart">Re-try</button>
+                <button id="quit">Quit</button>
+            </footer>
+        </div>   
+     </section>
+     <section class="all-box">
+         <div id="high-score">
+             <h2 id="new-high">New High Score!</h2>
+                <p>Add your initials below to be added to the list of winners!</p>
+            <form>
+                <label for="initials">Your Initials</label><br>
+                <input type="text" id="yi" name="yi"><br>
+            </form>
+            <footer>
+                <button id="restart">Re-try</button>
+                <button id="quit">Quit</button>
+            </footer>
+         </div>
+     </section>
+</body>
+</html>
