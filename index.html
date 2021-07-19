@@ -5,14 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="qanda.js", src="script.js"></script> <!--JS file that holds q&a's-->  <!--All other JS codes-->
     <title>Test Your Knowledge, Javascript Style!</title>
 </head>
 <body>
-    <section id="start page">
-        <h1>Are you ready to test your Javascript knowledge? Try this timed quiz now!</h1>
-        <button id="continue-btn">Continue</button>
+    <section class="all-box">
+        <div id="start-page">
+            <h1>Are you ready to test your Javascript knowledge? Try this timed quiz now!</h1>
+            <button id="continue-btn">Continue</button>
+        </div>
     </section>
+<br>
     <section class="all-box">
         <div id="rules-box">
             <h2>How this quiz works:</h2>
@@ -24,54 +26,54 @@
                 <p class="info">5. The quiz will end when all questions are answered or the timer reaches 0.</p>
                 <p class="info">6. Be sure to insert your initials to be added to the list of high scores!</p>
             </div>
-            <footer>
                 <button id="start-btn">Start the Quiz</button>
-            </footer>
     </section>
+<br>
     <section class="all-box">
         <div id="quiz-box">
-            <header>
-                <section id="title">Javascript Fundamentals Quiz</section>
-                <section id="timer">
+            <header>Javascript Fundamentals Quiz </header>
+        <section>
+            <p id="ques"></p>
+            <div class="choices">
+              <button id="btn0"><span id="choice0"></span></button>
+               <button id="btn1"><span id="choice1"></span></button>
+               <button id="btn2"><span id="choice2"></span></button>
+               <button id="btn3"><span id="choice3"></span></button>
+        <section id="keeper">
                     <div id="timer-text">Time Left</div>
-                    <div id="timer-#">90</div>
-                </section>
-            </header>
-            <section id="Q&A">
-                <div id="question"></div>
-                <div id="answers"></div>
-            </section>
-            <footer>
-                <button id="next-btn"></button>
-            </footer>
-        </div>
+                        <div class="total"></div>
+                    <div id="score-text"># Correct</div>
+                        <div class="total"></div>
+        <button id="next-btn">Next</button>
+        </section>
     </section>
+<br>
     <section class="all-box">
         <div id="result-box">
-            <h2 id="complete-text">Congrats! You've completed the Quiz!</h2>
+            <h2 id="result-text">Congrats! You've completed the Quiz!</h2>
             <div id="results">
-                <div id="score">Number Correct: </div>
-                <div id="time-left">Total Time Left: </div>
+                <div id="result-score">Number Correct: </div>
+                <div id="result-time-left">Total Time Left: </div>
             </div>
-            <footer>
-                <button id="restart">Re-try</button>
-                <button id="quit">Quit</button>
-            </footer>
-        </div>   
-     </section>
-     <section class="all-box">
-         <div id="high-score">
-             <h2 id="new-high">New High Score!</h2>
-                <p>Add your initials below to be added to the list of winners!</p>
+                <button id="restart-btn">Re-try</button>
+                <button id="quit-btn">Quit</button>
+        </div>
+    </section>
+<br>
+    <section class="all-box">
+        <div id="score-box">
+            <h2 id="new-high">New High Score!</h2>
+            <p>Add your initials below to be added to the list of winners!</p>
             <form>
                 <label for="initials">Your Initials</label><br>
-                <input type="text" id="yi" name="yi"><br>
+                <input type="text" id="yi" name="your initials"><br>
             </form>
-            <footer>
-                <button id="restart">Re-try</button>
-                <button id="quit">Quit</button>
-            </footer>
-         </div>
-     </section>
+                <button id="restart-btn">Re-try</button>
+                <button id="quit-btn">Quit</button>
+        </div>
+    </section>
+     <script src="script.js"></script>
+     <script src="qanda.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </body>
 </html>
