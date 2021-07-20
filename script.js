@@ -1,20 +1,4 @@
-//code sources: https://www.codingnepalweb.com/quiz-app-with-timer-javascript &
-//https://codepen.io/treighton/pen/NWjjJYy &
-//https://www.codegrepper.com/code-examples/javascript/javascript+quiz+with+timer
-//https://stackoverflow.com/questions/1191865/code-for-a-simple-javascript-countdown-timer
-
-var contBtn = document.querySelector('#continue-btn')
-var rulesBox = document.querySelector('#rules-box')
-var startPage = document.querySelector('#start-page')
-var startBtn = document.querySelector('#start-btn')
-var quizBox = document.querySelector('#quiz-box')
-var reTry = document.querySelector('#restart-btn')
-var quit = document.querySelector('#quit-btn')
-var resultBox = document.querySelector('#result-box')
-
-//BUTTONS
-
-// Animates buttons on hover
+// fucntion to animate buttons on hover
 $('.button').on('mouseenter', function () {
     $(this).addClass('active');
 });
@@ -22,145 +6,236 @@ $('.button').on('mouseleave', function () {
     $(this).removeClass('active');
 });
 
-//Continue button -> nav to Rules page
+//function for continue button (id="continue-btn") -> navigate from start page to rules box (id="rules-box")
+
+var goToRulesBox = document.querySelector("#rules-box");
+var contBtn = document.querySelector("#continue-btn");
 contBtn.onclick = () => {
-    startPage.classList.remove("startInfo"); //remove start page
-    rulesBox.classList.add("activeRules"); //show rules box
-}
+    if(goToRulesBox.style.display !== "none") {
+        goToRulesBox.style.display = "none";
+    }else {
+        goToRulesBox.style.display = "block";
+    }
+};
 
-//Start Quiz button -> nav to quiz page
+//function for start button (id="start-btn")-> navigate from rules box to quiz box (id="quiz-box")
+
+var goToQuizBox = document.querySelector("#quiz-box");
+var startBtn = document.querySelector("#start-btn");
 startBtn.onclick = () => {
-    rulesBox.classList.remove("activeRules"); //remove rules box
-    quizBox.classList.add("activeQuiz"); //show quiz box
-    showQuestions(0); //calling showQestions function
-    queCounter(1); //passing 1 parameter to queCounter
-    startTimer(15); //calling startTimer function
-}
+    if(goToQuizBox.style.display !== "none") {
+        goToQuizBox.style.display = "none";
+    }else {
+        goToQuizBox.style.display = "block";
+    }
+};
 
-//Retry button -> navigate to rules page
-let timeValue =  90
-let que_count = 0
-let que_numb = 1
-let userScore = 0
-let counter
+//function for generate quiz
 
-var reTry = result_box.querySelector('#restart-btn')
-var quit = result_box.querySelector('#quit-btn')
+  //Quiz Questions
 
-reTry.onclick = () => {
-    window.location.reload(rulesBox); //reload the rules page
-}
+  let questions = [
+      {
+      numb: 1,
+      title:"In a Window event, which property will display a message and an 'OK' and a 'Cancel' button?",
+      choices: [ "prompt()", "alert()", "confirm()", "getSelection()"],
+      answer:"confirm()"
+  },
+      {
+      numb: 2,
+      title:"In the console, which object method outputs a message?",
+      choices: [ "log()", "info()", "assert()", "clear()"],
+      answer:"log()"
+  },
+      {
+      numb: 3,
+      title:"In Javascript, there are 7 primitive types of data. These include objects, strings, numbers, _______, undefined, ______ and ______.",
+      choices: [ "symbols, functions, none", "text, operators, booleans", "symbols, data, null", "booleans, symbols, null"],
+      answer:"booleans, symbols, null",
+  },
+      {
+      numb: 4,
+      title:"Which Global function converts a string to a number?",
+      choices: [ "parseFloat()", "parseInt()", "Number()", "eval()"],
+      answer:"parseInt()"
+  },
+      {
+      numb: 5,
+      title:"Which statement marks a block of statements to be executed depending on a condition?",
+      choices: [ "if...else if...else", "for...in", "for...else", "try...catch...finally"],
+      answer:"if...else if...else"
+  },
+      {
+      numb: 6,
+      title:"This statement declares a variable inside brackets {} scope.",
+      choices: [ "const", "var", "break", "let"],
+      answer:"let",
+  },
+      {
+      numb: 7,
+      title:"Which string method returns the character at a specified index?",
+      choices: [ "match()", "indexOf()", "startsWith()", "charAt()"],
+      answer:"charAt()",
+  },
+      {
+      numb: 8,
+      title:"In an array, this method joins 2 or more arrays, but does not change the existing arrays.",
+      choices: [ "join()", "slice()", "concat()", "splice()"],
+      answer:"concat()",
+  }];
 
-//Quit button -> reload page
-quit.onclick = ()=>{
-    window.location.reload(); //reload the current window
-}
 
-//Timer
-var count = 90;
-var interval = startTimer(function(){
-    document.querySelector('#timer-#').innerHTML=count;
-    count--;
-    if (count === 0){
-        clearInterval(interval),
-        document.querySelector('#timer-#').innerHTML="Done",
-        alert("Time's Up!")
-      }1000;
+//function to render questions
+function nextQuestion() {
+    var randoQ = questions[Math.floor(Math.random() * questions.length)]
+    var title = document.querySelector('#ques')
+    var choices = document.querySelector('.choices ul')
 
-//QUIZ
+    title.textContent = randoQ.title
+    choices.innerHTML = randoQ.choices.map(choices => `<li>${choices}</li>`).join('')
+  }
+  document.querySelector('#next-btn').addEventListener('click', nextQuestion)
 
-//click attribute for user selection
-var choice = choices.querySelectorAll('.choice');
+//function to check answers
 
-for(i=0; i < choice.length; i++){
-    choice[i].setAttribute('onClick', 'optionSelected(this)');
-}
-
-function userChoice (answer){
-    clearInterval(counter); //clear counter
-    let userAns = answer.textContent; //getting user selected option
-    let correctAns = questions[que_count].answer; //getting correct answer from array
-    var allChoices = choices.children.length; //getting all option items
-    if(userAns == correctAns){ //if user selected option is equal to array's correct answer
-        userScore += 1; //upgrading score value with 1
-        answer.classList.add("correct");
-        console.log("Correct Answer");
-        console.log("Your correct answers = " + userScore);
-    }else{
-        answer.classList.add("incorrect");
-        console.log("Wrong Answer");
-
-        for(i=0; i < allChoices; i++){
-            if(choices.children[i].textContent == correctAns){ //if there is an option which is matched to an array answer
-                choices.children[i].setAttribute("class", "choice correct") //adding green color to matched option
-                console.log("Auto selected correct answer.")
-            }
+function checkAnswer() {
+    choices = document.getElementsByName("choices");
+    for(var i=0; i<choices.length; i++) {
+        if(choices[i].checked) {
+            choice = choices[i].value;
         }
     }
-    for(i=0; i < allChoices; i++){
-        choices.children[i].classList.add("disabled") //once user select an option then disabled all options
+    if(choice == questions[pos].answer) {
+        score++;
     }
-    nextBtn.classList.add("show") //show the next button if user selected any option
-}
+    pos++;
+    nextQuestion();
 
-function showResult(){
-    startPage.classList.remove('#startPage') //hide start page
-    rulesBox.classList.remove('#rules-box') //hide rules box
-    quizBox.classList.remove('#quiz-box') //hide quiz box
-    resultBox.classList.add('#result-box') //show result box
-    scoreText = resultBox.querySelector('#score')
-    timeLeft = resultBox.querySelector('#time-left')
+//function to get quiz to load
 
-    if (userScore > 3){ // if user scored more than 3
-        //creating a new span tag and passing the user score number and total question number
-        let scoreTag = 'Wow 🎉, You got '+ userScore + ' out of ' + questions.length +'.';
-        scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
+window.addEventListener("load", nextQuestion);
+
+//function for timer (id="timer-total")
+
+var timeLeft = 90;
+var timer = setInterval(function() {
+    if(timeLeft <= 0) {
+        clearInterval(timer);
+        goToResultBox.style.display = "block";
     }
-    else if(userScore > 1){ // if user scored more than 1
-        let scoreTag = 'Nice 😎, You got ' + userScore +  'out of '+ questions.length +'.';
-        scoreText.innerHTML = scoreTag;
+    document.querySelector(#timer-total).value = 90 - timeLeft;
+    timeLeft -= 1;
+}, 1000);
+
+
+//function for score counter (id="score-total")
+
+var btn0 = document.querySelector("#btn0");
+var btn1 = document.querySelector("#btn1");
+var btn2 = document.querySelector("#btn2");
+var btn3 = document.querySelector("#btn3");
+var scoreDisplay = document.querySelector("#score-total");
+var resultScore = document.querySelector("#result-score");
+var score = 0;
+var TargetScore = 8;
+var gameOver = false;
+
+btn0.addEventListener("click", function(){
+    if(!gameOver){
+        score +=1;
+    if score===TargetScore) {
+        scoreDisplay.classList.add("winner");
+        alert ("You Win!");
+        gameOver = true;
     }
-    else{ // if user scored less than 1
-        let scoreTag = 'Sorry 😐, You got only ' + userScore + ' out of ' +  questions.length +'.';
-        scoreText.innerHTML = scoreTag;
+    scoreDisplay.textContent=score;
     }
-}
-
-
-
-function startTimer(time){
-    counter = setInterval(timer, 1000);
-    function timer(){
-        timeCount.textContent = time; //changing the value of timeCount with time value
-        time--; //decrement the time value
-        if(time < 9){ //if timer is less than 9
-            let addZero = timeCount.textContent
-            timeCount.textContent = "0" + addZero //add a 0 before time value
-        }
-        if(time < 0){ //if timer is less than 0
-            clearInterval(counter); //clear counter
-            timeText.textContent = "Time Off"; //change the time text to time off
-            var allChoices = choices.children.length; //getting all option items
-            let correctAns = questions[que_count].answer; //getting correct answer from array
-            for(i=0; i < allOptions; i++){
-                if(choices.children[i].textContent == correctAns){ //if there is an option which is matched to an array answer
-                    choices.children[i].setAttribute("class", "option correct"); //adding green color to matched option
-                    choices.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
-                    console.log("Time Off: Auto selected correct answer.");
-                }
-            }
-            for(i=0; i < allOptions; i++){
-                choices.children[i].classList.add("disabled"); //once user select an option then disabled all options
-            }
-            nextBtn.classList.add("show"); //show the next button if user selected any option
-        }
+});
+btn1.addEventListener("click", function(){
+    if(!gameOver){
+        score +=1;
+    if score===TargetScore) {
+        scoreDisplay.classList.add("winner");
+        alert ("You Win!");
+        gameOver = true;
     }
-}
-const queCounter = document.querySelector("footer .total_que");
+    scoreDisplay.textContent=score;
+    }
+});
+btn2.addEventListener("click", function(){
+    if(!gameOver){
+        score +=1;
+    if score===TargetScore) {
+        scoreDisplay.classList.add("winner");
+        alert ("You Win!");
+        gameOver = true;
+    }
+    scoreDisplay.textContent=score;
+    }
+});
+btn3.addEventListener("click", function(){
+    if(!gameOver){
+        score +=1;
+    if score===TargetScore) {
+        scoreDisplay.classList.add("winner");
+        alert ("You Win!");
+        gameOver = true;
+    }
+    scoreDisplay.textContent=score;
+    }
+});
 
-function questionCounter(index){
-    //creating a new span tag and passing the question number and total question
-    let totalQueCount = ''+ index +' of '+ questions.length +' Questions';
-}
 
-populate();
+//function for questions selection (color indicators and alert) (id="ques")
+
+//function for next button -> go to next quiz question (id="next-btn")
+
+//function to hide next button until selection is made
+
+//function for result box ( id="result-box") -> navigate to result box when timer reaches 0 or from last question
+
+
+//function to display result time-left (id="result-time-left") and result score (id="result-score")
+
+//prompt for new high score to include users initials
+
+//function for restart button(id="restart-btn")-> navigate from result box to rules box (id="rules-box")
+
+var goToRulesBox = document.querySelector("#rules-box");
+var restartBtn = document.querySelector("#restart-btn");
+restartBtn.onclick = () => {
+    if(goToRulesBox.style.display !== "none") {
+        goToRulesBox.style.display = "none";
+    }else {
+        goToRulesBox.style.display = "block";
+    }
+};
+
+//function for quit button (id="quit-btn") -> navigate from result box to start page (id="start-page")
+
+var goToStartPage = document.querySelector("#start-page");
+var quitBtn = document.querySelector("#quit-btn");
+quitBtn.onclick = () => {
+    if(goToStartPage.style.display !== "none") {
+        goToStartPage.style.display = "none";
+    }else {
+        goToStartPage.style.display = "block";
+    }
+};
+
+//Code Sources: https://sebhastian.com/javascript-show-hide-div-onclick-toggle/
+//https://github.com/seogram/Simple-Score-keeper/tree/master/js
+//
+
+var quiz = document.querySelector("#quiz");
+var question = document.querySelector("#question");
+var choices = document.querySelector("#choices");
+var choice0 = document.querySelector("#choice0");
+var choice1 = document.querySelector("#choice1");
+var choice2 = document.querySelector("#choice2");
+var choice3 = document.querySelector("#choice3");
+var timerCounter = document.querySelector("#timer-counter");
+var timerTotal = document.querySelector("#timer-total");
+var scoreCounter = document.querySelector("#score-counter");
+var scoreTotal = document.querySelector("#score-total");
+

@@ -32,20 +32,27 @@
     <section class="all-box">
         <div id="quiz-box">
             <header>Javascript Fundamentals Quiz </header>
-        <section>
-            <p id="ques"></p>
-            <div class="choices">
-              <button id="btn0"><span id="choice0"></span></button>
-               <button id="btn1"><span id="choice1"></span></button>
-               <button id="btn2"><span id="choice2"></span></button>
-               <button id="btn3"><span id="choice3"></span></button>
-        <section id="keeper">
-                    <div id="timer-text">Time Left</div>
-                        <div class="total"></div>
-                    <div id="score-text"># Correct</div>
-                        <div class="total"></div>
-        <button id="next-btn">Next</button>
-        </section>
+            <section id="quiz">
+                <div id="question"></div>
+                <div class="choices">
+                <button class="choice-btn" id="choice0" onclick="checkAnswer('choice0')"></button>
+                <button class="choice-btn" id="choice1" onclick="checkAnswer('choice1')"></button>
+                <button class="choice-btn" id="choice2" onclick="checkAnswer('choice2')"></button>
+                <button class="choice-btn" id="choice3" onclick="checkAnswer('choice3')"></button>
+                </div>
+            </section>
+            <section id="timer">
+                        <div id="timer-text">Time Left</div>
+                        <div id="timer-counter"></div>
+                        <div id="timer-total"></div>
+            <section id="score-keeper"></section>
+                        <div id="score-text"># Correct</div>
+                        <div id="score-counter"></div>
+                        <div id="score-total"></div>
+            </section>
+            <button id="next-btn">Next</button>
+            </section>
+        </div>
     </section>
 <br>
     <section class="all-box">
@@ -55,19 +62,6 @@
                 <div id="result-score">Number Correct: </div>
                 <div id="result-time-left">Total Time Left: </div>
             </div>
-                <button id="restart-btn">Re-try</button>
-                <button id="quit-btn">Quit</button>
-        </div>
-    </section>
-<br>
-    <section class="all-box">
-        <div id="score-box">
-            <h2 id="new-high">New High Score!</h2>
-            <p>Add your initials below to be added to the list of winners!</p>
-            <form>
-                <label for="initials">Your Initials</label><br>
-                <input type="text" id="yi" name="your initials"><br>
-            </form>
                 <button id="restart-btn">Re-try</button>
                 <button id="quit-btn">Quit</button>
         </div>
