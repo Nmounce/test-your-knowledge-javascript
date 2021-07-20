@@ -1,4 +1,6 @@
-// fucntion to animate buttons on hover
+
+// function to animate buttons on hover
+
 $('.button').on('mouseenter', function () {
     $(this).addClass('active');
 });
@@ -7,26 +9,29 @@ $('.button').on('mouseleave', function () {
 });
 
 //function for continue button (id="continue-btn") -> navigate from start page to rules box (id="rules-box")
-
-var goToRulesBox = document.querySelector("#rules-box");
 var contBtn = document.querySelector("#continue-btn");
+var goToRulesBox = document.querySelector("#rules-box");
+var startPage = document.querySelector("#start-page");
 contBtn.onclick = () => {
     if(goToRulesBox.style.display !== "none") {
         goToRulesBox.style.display = "none";
     }else {
         goToRulesBox.style.display = "block";
+        startPage.style.display ="none";
     }
 };
 
+
 //function for start button (id="start-btn")-> navigate from rules box to quiz box (id="quiz-box")
 
-var goToQuizBox = document.querySelector("#quiz-box");
 var startBtn = document.querySelector("#start-btn");
+var goToQuizBox = document.querySelector("#quiz-box");
 startBtn.onclick = () => {
     if(goToQuizBox.style.display !== "none") {
         goToQuizBox.style.display = "none";
     }else {
         goToQuizBox.style.display = "block";
+        goToRulesBox.style.display = "none";
     }
 };
 
@@ -87,35 +92,39 @@ startBtn.onclick = () => {
 
 //function to render questions
 function nextQuestion() {
-    var randoQ = questions[Math.floor(Math.random() * questions.length)]
-    var title = document.querySelector('#ques')
-    var choices = document.querySelector('.choices ul')
+    var randoQ = questions[Math.floor(Math.random() * questions.length)];
+    var title = document.querySelector("#ques");
+    var choices = document.querySelector("#choices");
 
-    title.textContent = randoQ.title
-    choices.innerHTML = randoQ.choices.map(choices => `<li>${choices}</li>`).join('')
+    title.textContent = randoQ.title;
+    choices.innerHTML = randoQ.choices.map(choices => `<li>${choices}</li>`).join('');
   }
-  document.querySelector('#next-btn').addEventListener('click', nextQuestion)
+  checkAnswer();
 
 //function to check answers
-
+var green = "#33cc33";
+var red = "#ff0000";
+var choice = document.querySelector("#choice");
+var choices = document.getElementsByName("choices");
+var pos = 0;
+var score = document.querySelector("score-total");
 function checkAnswer() {
-    choices = document.getElementsByName("choices");
+    choices = document.getElementsByName("#choices");
     for(var i=0; i<choices.length; i++) {
         if(choices[i].checked) {
             choice = choices[i].value;
+            red.style.color = "red";
         }
     }
     if(choice == questions[pos].answer) {
         score++;
+        green.style.color = "green";
     }
     pos++;
     nextQuestion();
-
-//function to get quiz to load
-
-window.addEventListener("load", nextQuestion);
-
+}
 //function for timer (id="timer-total")
+
 
 var timeLeft = 90;
 var timer = setInterval(function() {
@@ -123,119 +132,50 @@ var timer = setInterval(function() {
         clearInterval(timer);
         goToResultBox.style.display = "block";
     }
-    document.querySelector(#timer-total).value = 90 - timeLeft;
+    document.querySelector("#timer-total").value = 90 - timeLeft;
     timeLeft -= 1;
 }, 1000);
 
+timer();
 
-//function for score counter (id="score-total")
-
-var btn0 = document.querySelector("#btn0");
-var btn1 = document.querySelector("#btn1");
-var btn2 = document.querySelector("#btn2");
-var btn3 = document.querySelector("#btn3");
-var scoreDisplay = document.querySelector("#score-total");
+//function to display result time-left (id="result-time-left") Toand result score (id="result-score")
 var resultScore = document.querySelector("#result-score");
-var score = 0;
-var TargetScore = 8;
-var gameOver = false;
+var resultTimeLeft = document.querySelector("#result-time-left");
 
-btn0.addEventListener("click", function(){
-    if(!gameOver){
-        score +=1;
-    if score===TargetScore) {
-        scoreDisplay.classList.add("winner");
-        alert ("You Win!");
-        gameOver = true;
-    }
-    scoreDisplay.textContent=score;
-    }
-});
-btn1.addEventListener("click", function(){
-    if(!gameOver){
-        score +=1;
-    if score===TargetScore) {
-        scoreDisplay.classList.add("winner");
-        alert ("You Win!");
-        gameOver = true;
-    }
-    scoreDisplay.textContent=score;
-    }
-});
-btn2.addEventListener("click", function(){
-    if(!gameOver){
-        score +=1;
-    if score===TargetScore) {
-        scoreDisplay.classList.add("winner");
-        alert ("You Win!");
-        gameOver = true;
-    }
-    scoreDisplay.textContent=score;
-    }
-});
-btn3.addEventListener("click", function(){
-    if(!gameOver){
-        score +=1;
-    if score===TargetScore) {
-        scoreDisplay.classList.add("winner");
-        alert ("You Win!");
-        gameOver = true;
-    }
-    scoreDisplay.textContent=score;
-    }
-});
+resultScore(score);
+resultTimeLeft(timeLeft);
 
-
-//function for questions selection (color indicators and alert) (id="ques")
-
-//function for next button -> go to next quiz question (id="next-btn")
-
-//function to hide next button until selection is made
-
-//function for result box ( id="result-box") -> navigate to result box when timer reaches 0 or from last question
-
-
-//function to display result time-left (id="result-time-left") and result score (id="result-score")
 
 //prompt for new high score to include users initials
 
-//function for restart button(id="restart-btn")-> navigate from result box to rules box (id="rules-box")
+var initials = prompt("New high score! Please enter your initials below to be added to our leader board!");
 
+//function for restart button(id="restart-btn")-> navigate from result box to rules box (id="rules-box")
+var restartBtn = document.querySelector("restart-btn");
 var goToRulesBox = document.querySelector("#rules-box");
-var restartBtn = document.querySelector("#restart-btn");
+var goToResultBox = document.querySelectorAll("#result-box");
 restartBtn.onclick = () => {
     if(goToRulesBox.style.display !== "none") {
         goToRulesBox.style.display = "none";
     }else {
         goToRulesBox.style.display = "block";
+        goToResultBox.style.display = "none";
     }
+    initials();
 };
 
 //function for quit button (id="quit-btn") -> navigate from result box to start page (id="start-page")
-
-var goToStartPage = document.querySelector("#start-page");
 var quitBtn = document.querySelector("#quit-btn");
+var goToStartPage = document.querySelector("#start-page");
 quitBtn.onclick = () => {
     if(goToStartPage.style.display !== "none") {
         goToStartPage.style.display = "none";
-    }else {
-        goToStartPage.style.display = "block";
+    }else; {
+        window.location.reload()
     }
+    initials();
 };
 
 //Code Sources: https://sebhastian.com/javascript-show-hide-div-onclick-toggle/
 //https://github.com/seogram/Simple-Score-keeper/tree/master/js
 //
-
-var quiz = document.querySelector("#quiz");
-var question = document.querySelector("#question");
-var choices = document.querySelector("#choices");
-var choice0 = document.querySelector("#choice0");
-var choice1 = document.querySelector("#choice1");
-var choice2 = document.querySelector("#choice2");
-var choice3 = document.querySelector("#choice3");
-var timerCounter = document.querySelector("#timer-counter");
-var timerTotal = document.querySelector("#timer-total");
-var scoreCounter = document.querySelector("#score-counter");
-var scoreTotal = document.querySelector("#score-total");
-
