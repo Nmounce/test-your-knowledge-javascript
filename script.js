@@ -21,17 +21,23 @@ contBtn.onclick = () => {
 };
 
 //function for timer (id="timer-counter")
+var goToResultBox = document.querySelector("#result-box");
+var timeLeft = document.getElementById("time-left").innerHTML;
+var seconds = 90;
 function startTimer() {
-    var seconds = document.querySelector("#timer-counter");
-    var timer = setInterval(function () {
+    var timeLeft = setInterval(function () {
         seconds--;
         if (seconds <= 0) {
             alert("Time's Up!");
-            clearInterval(timer);
+            clearInterval(timeLeft);
             goToResultBox.style.display = "block";
         }
     }, 1000);
+};
+function stopTimer() {
+    clearInterval(startTimer);
 }
+
 //function for start button (id="start-btn")-> navigate from rules box to quiz box (id="quiz-box")
 
 var startBtn = document.querySelector("#start-btn");
@@ -43,9 +49,8 @@ startBtn.onclick = () => {
         goToQuizBox.style.display = "block";
         goToRulesBox.style.display = "none";
     }
-    nextQuestion();
-    window.onload = startTimer();
-
+    nextQuestion(indexNumber);
+    startTimer();
 };
 
 
@@ -137,22 +142,22 @@ let indexNumber = 0;
 function nextQuestion(index) {
     handleQuestions();
     const currentQuestion = shuffledQuestions[index];
-    document.getElementById("#question-number").innerHTML = questionNumber;
-    document.getElementById("#player-score").innerHTML = playerScore;
-    document.getElementById("#display-question").innerHTML = currentQuestion.title;
-    document.getElementById("#option-one-label").innerHTML = currentQuestion.option1;
-    document.getElementById("#option-two-label").innerHTML = currentQuestion.option2;
-    document.getElementById("#option-three-label").innerHTML = currentQuestion.option3;
-    document.getElementById("#option-four-label").innerHTML = currentQuestion.option4;
+    console.log(index);
+    document.getElementById("question-number").innerHTML = questionNumber;
+    document.getElementById("player-score").innerHTML = playerScore;
+    document.getElementById("display-question").innerHTML = currentQuestion.title;
+    document.getElementById("option-one-label").innerHTML = currentQuestion.option1;
+    document.getElementById("option-two-label").innerHTML = currentQuestion.option2;
+    document.getElementById("option-three-label").innerHTML = currentQuestion.option3;
+    document.getElementById("option-four-label").innerHTML = currentQuestion.option4;
 }
 
 //function to check answers
+let correctOption = null;
 function checkForAnswer() {
     const currentQuestion = shuffledQuestions[indexNumber];
     const currentQuestionAnswer = currentQuestion.correctOption;
     const options = document.getElementsByName("option");
-    let correctOption = null;
-
     options.forEach((option) => {
         if(option.value === currentQuestionAnswer) {
             correctOption = option.labels[0].id;
@@ -190,6 +195,7 @@ function checkForAnswer() {
 
 
 //called when the next button is called
+var goToResultBox = document.querySelector("#result-box");
 function handleNextQuestion() {
     checkForAnswer();
     unCheckRadioButtons();
@@ -199,8 +205,9 @@ function handleNextQuestion() {
             nextQuestion(indexNumber);
         }
         else {
+            stopTimer();
             handleEndGame();
-            goToResults();
+            goToResultBox.style.display = "block";
         }
         resetOptionBackground();
     }, 1000);
@@ -236,12 +243,11 @@ function goToResult() {
 function handleEndGame() {
     let remark = null;
     let remarkColor = null;
-    document.getElementById("#remarks").innerHTML = remark;
-    document.getElementById("#remarks").style.color = remarkColor;
-    document.getElementById("#grade").innerHTML = playerGrade;
-    document.getElementById("#result-time-left").innerHTML = timeLeftOver;
-    document.getElementById("#result-score").innerHTML = playerScore;
-    document.getElementById("#score-modal").style.display = "flex";
+    const playerGrade = (playerScore / 8) * 100;
+    document.getElementById("remarks").innerHTML = remark;
+    document.getElementById("remarks").style.color = remarkColor;
+    document.getElementById("grade").innerHTML = playerGrade;
+    document.getElementById("result-score").innerHTML = playerScore;
     // condition check for player remark and remark color
     if (playerScore <= 3) {
         remark = "Keep trying!";
@@ -256,20 +262,19 @@ function handleEndGame() {
         remarkColor = "blue";
         prompt("New High Score! Enter your initials below to be added to the leaderboard!");
     }
-    const playerGrade = (playerScore / 8) * 100;
+
 }
 
 //function for restart button(id="restart-btn")-> navigate from result box to rules box (id="rules-box")
 var restartBtn = document.querySelector("#restart-btn");
 var goToRulesBox = document.querySelector("#rules-box");
-var goToResultBox = document.querySelectorAll("#result-box");
 restartBtn.onclick = () => {
     questionNumber = 1;
     playerScore = 0;
     wrongAttempt = 0;
     indexNumber = 0;
     shuffledQuestions = [];
-    NextQuestion(indexNumber);
+    nextQuestion(indexNumber);
     document.getElementById("#score-modal").style.display = "none";
     if (goToRulesBox.style.display !== "none") {
         goToRulesBox.style.display = "none";
@@ -286,6 +291,7 @@ quitBtn.onclick = () => {
     if (goToStartPage.style.display !== "none") {
         goToStartPage.style.display = "none";
     } else; {
-        window.location.reload();
+        goToStartBox.style.display = "block";
+        goToStartBox.style.display = "none";
     }
 };

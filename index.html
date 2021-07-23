@@ -10,8 +10,8 @@
 <body>
     <section class="all-box" id="start-page" style="display: block">
         <h1>Are you ready to test your Javascript knowledge? Try this timed quiz now!</h1>
-        <div class= "page-btns">
-            <button id="continue-btn">Continue</button>
+        <div>
+            <button class= "page-btns" id="continue-btn">Continue</button>
         </div>
     </section>
 <br>
@@ -25,8 +25,8 @@
             <p class="info">5. The quiz will end when all questions are answered or the timer reaches 0.</p>
             <p class="info">6. Be sure to insert your initials to be added to the list of high scores!</p>
         </div>
-        <div class= "page-btns">
-            <button id="start-btn">Start the Quiz</button>
+        <div>
+            <button  class= "page-btns" id="start-btn">Start the Quiz</button>
         </div>
     </section>
 <br>
@@ -36,16 +36,14 @@
             <section id="time-score-container">
                 <h3>Score : <span class="count" id="player-score"></span> / 8</h3>
                 <h3>Question : <span class="count" id="question-number"></span> / 8</h3>
-                <h3>Time Left : <span class="count" id="time-left-text"></span></h3>
+                <h3>Time Left : <span class="count" id="time-left"></span> sec</h3>
             </section>
             <div id="question-container">
                 <h2 id="display-question"></h2>
             </div>
             <div id="quiz-options-container">
                 <div id="option-modal">
-                    <div id="modal-content-container">
-                        <h2>Please Select An Option</h2>
-                    </div>
+                    <div id="modal-content-container"></div>
                 </div>
             </div>
             <span>
@@ -71,21 +69,21 @@
                 <label for="option-four" class="option" id="option-four-label"></label>
             </span>
         </section>
-        <div class="page-btns">
-            <button onclick="handleNextQuestion()">Next Question</button>
+        <div>
+            <button  id="next-btn" class="page-btns" onclick="handleNextQuestion()">Next Question</button>
         </div>
     </section>
     <section class="all-box" id="result-box" style="display: none">
         <h2>Congrats! You've completed the Quiz!</h2>
         <div id="results">
-            <p>Number Correct : <span class="result-text" id="result-score"></span></p>
-            <p>Total Time Left : <span class="result-text" id="result-time-left"></span></p>
-            <p>Grade : <span class="result-text" id="result-grade"></span></p>
+            <p>Number Correct : <span class="result-text" id="result-score"></span> / 8</p>
+            <p>Total Time Left : <span class="result-text" id="result-time-left"></span> Sec</p>
+            <p>Grade : <span class="result-text" id="grade"></span> %</p>
             <p><span id="remarks"></span></p>
         </div>
-        <div class= "page-btns">
-            <button id="restart-btn">Re-try</button>
-            <button id="quit-btn">Quit</button>
+        <div class="rqbuttons">
+            <button  class= "page-btns" id="restart-btn">Re-try</button>
+            <button  class= "page-btns" id="quit-btn">Quit</button>
         </div>
     </section>
      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
