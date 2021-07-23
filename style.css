@@ -1,0 +1,167 @@
+body {
+    background-color: cadetblue;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.all-box {
+    width: 50%;
+    height: 525px;
+    border: black solid thin;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 10px 20px 10px black, 15px 15px 15px 15px burlywood;
+    text-align: center;
+    background-color: azure;
+}
+
+h1 {
+    padding-top: 5%;
+    font-size: 72px;
+    color: black;
+    text-shadow: 2px 2px burlywood;
+}
+
+.page-btns {
+    font-size: 36px;
+    width: 200px;
+    text-align: center;
+    border: black thin solid;
+    box-shadow: 0 2px 2px 2px black;
+
+}
+#continue-btn {
+    height: 60px;
+}
+
+h2 {
+    font-size: 48px;
+    text-decoration: underline;
+    text-shadow: 2px 2px burlywood;
+}
+
+#rule-list {
+    text-align: left;
+    font-size: 21px;
+    padding-left:10%;
+}
+
+#start-btn {
+    margin-top:2%;
+    width: 50%;
+}
+
+header {
+    font-size: 50px;
+    padding-top: 1%;
+    text-decoration-line: underline;
+    text-shadow: 2px 2px burlywood;
+}
+
+#quiz {
+    width: 75%;
+    height: 350px;
+    margin:auto;
+    margin-top:3%;
+}
+
+#question {
+    width: 100%;
+    text-align: center;
+    color: rgb(25, 51, 51);
+    height: 65px;
+    margin:auto;
+    padding-top: 2%;
+}
+
+.choices {
+    display: grid;
+    width: 50%;
+    padding-left:25%;
+}
+
+.choice-btn {
+    height: 45px;
+    text-align: center;
+    font-size: 20px;
+    color: darkblue;
+    margin-top: 1%;
+}
+#time-score {
+    height: 55px;
+    display: inline-flex;
+    width: 100%;
+}
+#timer {
+    width: 33%;
+    display: inline-flex;
+    margin-left:20%;
+}
+
+.count-text {
+  width: 50%;
+  font-size: 30px;
+  text-align: left;
+}
+
+#timer-text {
+    margin-left:15%;
+}
+
+#timer-counter {
+    margin-left:-15%;
+    background-color: bisque;
+}
+.count-box {
+    width: 30%;
+    border: solid;
+    height: 35px;
+    margin-left:-20%;
+    font-size: 20px;
+    color: black;
+}
+#score-keeper {
+    width: 33%;
+    display: inline-flex;
+    margin-left:-5%;
+}
+
+#score-text {
+    padding: 0 3% 0 5%;
+    margin-left: 5%;
+}
+
+#score-counter {
+    background-color: burlywood;
+}
+
+#next-btn {
+    margin-bottom: 0.5%;
+}
+
+#results {
+    display: inline-block;
+    width: 75%;
+    margin: -3% 0 3% 0;
+    text-align: left;
+    font-size: 36px;
+}
+
+.result-text {
+    margin: 1% 0 1% 32%;
+    width: 50%;
+}
+
+.result-value {
+    font-size: 60px;
+    text-align: center;
+    color:mediumblue;
+    height: 75px;
+    width: 20%;
+    margin: 0 0 2% 40%;
+}
+
+#restart-btn {
+    margin: 0 3% 2% 0;
+}

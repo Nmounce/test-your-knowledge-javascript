@@ -10,10 +10,12 @@
 <body>
     <section class="all-box" id="start-page" style="display: block">
         <h1>Are you ready to test your Javascript knowledge? Try this timed quiz now!</h1>
-        <button id="continue-btn">Continue</button>
+        <div class= "page-btns">
+            <button id="continue-btn">Continue</button>
+        </div>
     </section>
 <br>
-    <section class="all-box" id="rules-box" style="display:none" >
+    <section class="all-box" id="rules-box" style="display: none">
         <h2>How this quiz works:</h2>
         <div id="rule-list">
             <p class="info">1. Once the start button is clicked, the timer will start.You will be given <span>90 seconds</span> to answer 8 questions!</p>
@@ -23,48 +25,74 @@
             <p class="info">5. The quiz will end when all questions are answered or the timer reaches 0.</p>
             <p class="info">6. Be sure to insert your initials to be added to the list of high scores!</p>
         </div>
-        <div>
+        <div class= "page-btns">
             <button id="start-btn">Start the Quiz</button>
         </div>
     </section>
 <br>
-    <section class="all-box" id="quiz-box"  style="display:none">
+    <section class="all-box" id="quiz-box"  style="display: none">
         <header>Javascript Fundamentals Quiz </header>
         <section id="quiz">
-            <div id="question"></div>
-            <div class="choices">
-                <button class="choice-btn" id="choice0" onclick="checkAnswer('choice0')"></button>
-                <button class="choice-btn" id="choice1" onclick="checkAnswer('choice1')"></button>
-                <button class="choice-btn" id="choice2" onclick="checkAnswer('choice2')"></button>
-                <button class="choice-btn" id="choice3" onclick="checkAnswer('choice3')"></button>
+            <section id="time-score-container">
+                <h3>Score : <span class="count" id="player-score"></span> / 8</h3>
+                <h3>Question : <span class="count" id="question-number"></span> / 8</h3>
+                <h3>Time Left : <span class="count" id="time-left-text"></span></h3>
+            </section>
+            <div id="question-container">
+                <h2 id="display-question"></h2>
             </div>
+            <div id="quiz-options-container">
+                <div id="option-modal">
+                    <div id="modal-content-container">
+                        <h2>Please Select An Option</h2>
+                        <div id="modal-button-container">
+                            <button id="continue-btn">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span>
+                <input type="radio" id="option-one" name="option" class="radio" value="option1" />
+                <label for="option-one" class="option" id="option-one-label"></label>
+            </span>
+
+
+            <span>
+                <input type="radio" id="option-two" name="option" class="radio" value="option2" />
+                <label for="option-two" class="option" id="option-two-label"></label>
+            </span>
+
+
+            <span>
+                <input type="radio" id="option-three" name="option" class="radio" value="option3" />
+                <label for="option-three" class="option" id="option-three-label"></label>
+            </span>
+
+
+            <span>
+                <input type="radio" id="option-four" name="option" class="radio" value="option4" />
+                <label for="option-four" class="option" id="option-four-label"></label>
+            </span>
         </section>
-        <section id="timer">
-                    <div id="timer-text">Time Left</div>
-                    <div id="timer-counter"></div>
-                    <div id="timer-total"></div>
-        <section id="score-keeper">
-                    <div id="score-text"># Correct</div>
-                    <div id="score-counter"></div>
-                    <div id="score-total"></div>
-        </section>
-        <div>
-            <button id="next-btn">Next</button>
+        <div class="page-btns">
+            <button onclick="handleNextQuestion()">Next Question</button>
         </div>
     </section>
-<br>
-    <section class="all-box" id="result-box" style="display:none">
-        <h2 id="result-text">Congrats! You've completed the Quiz!</h2>
+    <section class="all-box" id="result-box" style="display: none">
+        <h2>Congrats! You've completed the Quiz!</h2>
         <div id="results">
-            <div id="result-score">Number Correct: </div>
-            <div id="result-time-left">Total Time Left: </div>
+            <p>Number Correct : <span class="result-text" id="result-score"></span></p>
+            <p>Total Time Left : <span class="result-text" id="result-time-left"></span></p>
+            <p>Grade : <span class="result-text" id="result-grade"></span></p>
+            <p><span id="remarks"></span></p>
         </div>
-        <div>
+        <div class= "page-btns">
             <button id="restart-btn">Re-try</button>
             <button id="quit-btn">Quit</button>
         </div>
     </section>
-     <script src="script.js"></script>
      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+     <script src="script.js"></script>
 </body>
 </html>
+
