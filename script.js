@@ -22,21 +22,25 @@ contBtn.onclick = () => {
 
 //function for timer (id="timer-counter")
 var goToResultBox = document.querySelector("#result-box");
-var timeLeft = document.getElementById("time-left").innerHTML;
+var timer = document.getElementById("time-left");
 var seconds = 90;
+var timeLeft = setInterval(function () {
+    seconds--;
+    timer.textContent = seconds;
+    console.log(seconds);
+    if (seconds <= 0) {
+        alert("Time's Up!");
+        clearInterval(timeLeft);
+        goToResultBox.style.display = "block";
+    }
+}, 1000);
+console.log(timer);
 function startTimer() {
-    var timeLeft = setInterval(function () {
-        seconds--;
-        if (seconds <= 0) {
-            alert("Time's Up!");
-            clearInterval(timeLeft);
-            goToResultBox.style.display = "block";
-        }
-    }, 1000);
-};
-function stopTimer() {
-    clearInterval(startTimer);
+   timeLeft;
 }
+function stopTimer() {
+    clearInterval(timeLeft);
+};
 
 //function for start button (id="start-btn")-> navigate from rules box to quiz box (id="quiz-box")
 
@@ -238,6 +242,7 @@ function goToResult() {
         goToQuizBox.style.display = "none";
         goToResultBox.style.display = "block";
     }
+    handleEndGame();
 };
 
 function handleEndGame() {
@@ -248,18 +253,15 @@ function handleEndGame() {
     document.getElementById("remarks").style.color = remarkColor;
     document.getElementById("grade").innerHTML = playerGrade;
     document.getElementById("result-score").innerHTML = playerScore;
+    document.getElementById("result-time-left").innerHTML = seconds;
     // condition check for player remark and remark color
     if (playerScore <= 3) {
-        remark = "Keep trying!";
-        remarkColor = "red";
+        prompt("Keep trying!");
     }
     else if (playerScore >= 4 && playerScore < 7) {
-        remark = "You can do better.";
-        remarkColor = "yellow";
+        prompt("You can do better.");
     }
     else if (playerScore >= 7) {
-        remark = "Excellent!";
-        remarkColor = "blue";
         prompt("New High Score! Enter your initials below to be added to the leaderboard!");
     }
 
@@ -275,9 +277,8 @@ restartBtn.onclick = () => {
     indexNumber = 0;
     shuffledQuestions = [];
     nextQuestion(indexNumber);
-    document.getElementById("#score-modal").style.display = "none";
-    if (goToRulesBox.style.display !== "none") {
-        goToRulesBox.style.display = "none";
+    if (goToResultBox.style.display !== "block") {
+        goToResultBox.style.display = "block";
     } else {
         goToRulesBox.style.display = "block";
         goToResultBox.style.display = "none";
@@ -288,10 +289,10 @@ restartBtn.onclick = () => {
 var quitBtn = document.querySelector("#quit-btn");
 var goToStartPage = document.querySelector("#start-page");
 quitBtn.onclick = () => {
-    if (goToStartPage.style.display !== "none") {
-        goToStartPage.style.display = "none";
+    if (goToResultBox.style.display !== "block") {
+        goToResultBox.style.display = "block";
     } else; {
-        goToStartBox.style.display = "block";
-        goToStartBox.style.display = "none";
+        goToResultBox.style.display = "none";
+        goToStartPage.style.display = "block";
     }
 };

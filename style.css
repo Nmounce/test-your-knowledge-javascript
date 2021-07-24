@@ -21,7 +21,7 @@ h1 {
   width:75%;
   margin-left: 10%;
     padding-top: 5%;
-    font-size: 60px;
+    font-size: 56px;
     color: black;
     text-shadow: 2px 2px burlywood;
 }
@@ -33,6 +33,7 @@ h1 {
     text-align: center;
     border: black thin solid;
     box-shadow: 0 2px 2px 2px black;
+    margin-top: 2%;
 
 }
 
@@ -50,6 +51,7 @@ h2 {
 #start-btn {
     margin-top:3%;
     width: 30%;
+    font-size: 26px;
 }
 
 header {
@@ -79,7 +81,7 @@ h3 {
 }
 span label {
     display: grid;
-    width: 50%;
+    width: 70%;
     padding: 0.5%;
     align-items: center;
     justify-content: center;
@@ -90,7 +92,7 @@ span label {
     transition-delay: 0s;
     font-size: 30px;
     color: black;
-    margin: 0 0 1% 25%;
+    margin: 0 0 1% 15%;
     cursor: pointer;
     font-weight:600;
     background: darkgray;
@@ -102,9 +104,10 @@ span label {
 
 #next-btn {
     width: 250px;
-    margin-top: 10%;
 }
-
+#result-box {
+    width: 100%;
+}
 #results {
     display: inline-block;
     width: 50%;

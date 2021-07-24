@@ -36,43 +36,41 @@
             <section id="time-score-container">
                 <h3>Score : <span class="count" id="player-score"></span> / 8</h3>
                 <h3>Question : <span class="count" id="question-number"></span> / 8</h3>
-                <h3>Time Left : <span class="count" id="time-left"></span> sec</h3>
+                <h3>Time Left : <span class="count" id="time-left">90</span>sec</h3>
             </section>
             <div id="question-container">
                 <h2 id="display-question"></h2>
             </div>
             <div id="quiz-options-container">
                 <div id="option-modal">
-                    <div id="modal-content-container"></div>
+                    <span>
+                        <input type="radio" id="option-one" name="option" class="radio" value="option1" />
+                        <label for="option-one" class="option" id="option-one-label"></label>
+                    </span>
+
+
+                    <span>
+                        <input type="radio" id="option-two" name="option" class="radio" value="option2" />
+                        <label for="option-two" class="option" id="option-two-label"></label>
+                    </span>
+
+
+                    <span>
+                        <input type="radio" id="option-three" name="option" class="radio" value="option3" />
+                        <label for="option-three" class="option" id="option-three-label"></label>
+                    </span>
+
+
+                    <span>
+                        <input type="radio" id="option-four" name="option" class="radio" value="option4" />
+                        <label for="option-four" class="option" id="option-four-label"></label>
+                    </span>
+                    <div>
+                        <button  id="next-btn" class="page-btns" onclick="handleNextQuestion()">Next Question</button>
+                    </div>
                 </div>
             </div>
-            <span>
-                <input type="radio" id="option-one" name="option" class="radio" value="option1" />
-                <label for="option-one" class="option" id="option-one-label"></label>
-            </span>
-
-
-            <span>
-                <input type="radio" id="option-two" name="option" class="radio" value="option2" />
-                <label for="option-two" class="option" id="option-two-label"></label>
-            </span>
-
-
-            <span>
-                <input type="radio" id="option-three" name="option" class="radio" value="option3" />
-                <label for="option-three" class="option" id="option-three-label"></label>
-            </span>
-
-
-            <span>
-                <input type="radio" id="option-four" name="option" class="radio" value="option4" />
-                <label for="option-four" class="option" id="option-four-label"></label>
-            </span>
         </section>
-        <div>
-            <button  id="next-btn" class="page-btns" onclick="handleNextQuestion()">Next Question</button>
-        </div>
-    </section>
     <section class="all-box" id="result-box" style="display: none">
         <h2>Congrats! You've completed the Quiz!</h2>
         <div id="results">
